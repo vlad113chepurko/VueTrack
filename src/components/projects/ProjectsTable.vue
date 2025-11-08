@@ -3,8 +3,8 @@ import "./_ProjectsTable.scss";
 import { useProjectStore } from "@/stores/useProjectStore";
 import { useRouter } from "vue-router";
 import draggable from "vuedraggable";
-
 const router = useRouter();
+
 const projectStore = useProjectStore();
 
 const goToProfile = (projectId: number) => {
@@ -25,13 +25,22 @@ const goToProfile = (projectId: number) => {
     </div>
 
     <draggable
-      v-model="projectStore.filteredProjects"
+      v-model="projectStore.projects"
       tag="div"
       class="table__body"
       :animation="200"
     >
       <template #item="{ element: project }">
-        <div class="table__row" @click="goToProfile(project.ID)">
+        <div
+          v-if="
+            (projectStore.selectedStatus === 'All' ||
+              project.Status === projectStore.selectedStatus) &&
+            (!projectStore.projectName ||
+              project.ProjectName.includes(projectStore.projectName))
+          "
+          class="table__row"
+          @click="goToProfile(project.ID)"
+        >
           <div class="table__cell">{{ project.ID }}</div>
           <div class="table__cell">{{ project.ProjectName }}</div>
           <div class="table__cell">{{ project.TaskCounter }}</div>

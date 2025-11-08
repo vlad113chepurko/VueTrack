@@ -1,20 +1,16 @@
 <script setup lang="ts">
 import "../addProject/_AddProjects.scss";
 import { ref } from "vue";
-import type { Task } from "@/interfaces/index";
-import { useTasksStore } from "@/stores/useTasksStore";
-import { useProjectStore } from "@/stores/useProjectStore";
 import { useRoute } from "vue-router";
-import { useModalStore } from "@/stores/useModalStore";
+import type { Task } from "@/interfaces/index";
+import { useProjectStore } from "@/stores/useProjectStore";
+import { useTasksStore } from "@/stores/useTasksStore";
+import { TaskService } from "@/services/tasks.service";
 
 const route = useRoute();
-const projectIdFromRoute = Number(route.params.id) || 0;
-const taskStore = useTasksStore();
-const tasks = taskStore.tasks;
-const modalStore = useModalStore();
-
-const projectStore = useProjectStore();
-const projects = projectStore.projects;
+const projectIdFromRoute = Number(route.params.id);
+const projects = useProjectStore().projects;
+const tasks = useTasksStore().tasks;
 
 const newTask = ref<Task>({
   ID: tasks.length > 0 ? Math.max(...tasks.map((t) => t.ID)) + 1 : 1,
@@ -24,46 +20,13 @@ const newTask = ref<Task>({
   TaskDeadline: new Date().toString().split("T")[0],
   ProjectID: projectIdFromRoute,
 });
-
-const onSubmit = () => {
-  const taskToAdd = { ...newTask.value };
-
-  taskStore.addTask(taskToAdd);
-
-  modalStore.createModal(`Task ${taskToAdd.TaskName} was created!`);
-
-  const projectIndex = projects.findIndex((p) => p.ID === taskToAdd.ProjectID);
-  if (projectIndex !== -1) {
-    const project = projects[projectIndex];
-
-    const updatedTasks = project!.Tasks
-      ? [...project!.Tasks, taskToAdd]
-      : [taskToAdd];
-
-    projects[projectIndex] = {
-      ID: project!.ID,
-      ProjectName: project!.ProjectName,
-      ProjectDescription: project!.ProjectDescription,
-      Status: project!.Status,
-      CreateAt: project!.CreateAt,
-      Tasks: updatedTasks,
-      TaskCounter: updatedTasks.length,
-    };
-  }
-
-  newTask.value = {
-    ID: tasks.length > 0 ? Math.max(...tasks.map((t) => t.ID)) + 1 : 1,
-    TaskName: "",
-    TaskAuthor: "",
-    TaskStatus: "todo",
-    TaskDeadline: new Date().toISOString().split("T")[0],
-    ProjectID: projectIdFromRoute,
-  };
-};
 </script>
 
 <template>
-  <form class="form" @submit.prevent="onSubmit">
+  <form
+    class="form"
+    @submit.prevent="TaskService.addTaskToProject(newTask, projects)"
+  >
     <h2>Add New Task</h2>
     <button @click="$emit('close')" type="button" class="form__close">
       <span>X</span>
