@@ -1,0 +1,22 @@
+@use "@/styles/mixins.scss" as *;
+
+.project-view {
+  @include flex(column, center, center);
+  width: 100%;
+  padding: 24px;
+  gap: 16px;
+}
+
+.project-wrapper {
+  @include flex(column, flex-start, center);
+  width: 100%;
+  padding: 16px;
+
+  border: 1px solid blue
+}
+.project-details {
+  @include flex(column, flex-start, flex-start);
+  width: 100%;
+  margin-bottom: 10px;
+  padding-left: 20px;
+}

@@ -1,0 +1,43 @@
+@use "@/styles/variables" as *;
+
+.modal {
+  z-index: 1000;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+
+  width: 300px;
+  height: 60px;
+  padding: 10px;
+  background: $accent;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  font-weight: bold;
+
+  border-radius: 5%;
+
+  font-size: 1rem;
+  color: white;
+
+  animation: moveIn 0.3s ease-in;
+
+  button {
+    color: white;
+  }
+}
+
+@keyframes moveIn {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

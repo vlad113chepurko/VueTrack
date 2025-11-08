@@ -1,0 +1,38 @@
+.sort {
+  @include flex(row, flex-start, center);
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 10px 20px 10px 20px;
+
+  min-height: 200px;
+
+  border: 1px solid $muted-input;
+  border-radius: 5px;
+  gap: 5%;
+
+  margin-bottom: 10px;
+
+  input,
+  select {
+    height: 50px;
+    font-size: 1rem;
+    border: 1px solid $muted-input;
+    border-radius: 5px;
+    padding: 10px;
+
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      border-color: $primary;
+      box-shadow: 0 0 5px rgba($primary, 0.5);
+    }
+  }
+}
+
+.sort__container {
+  width: 100%;
+  gap: 20px;
+  margin-bottom: 10px;
+  @include flex(row, flex-start, center);
+}

@@ -1,0 +1,30 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.app-container {
+  width: 1440px;
+  height: auto;
+  padding-bottom: 50px;
+  background-color: $surfaces;
+
+  margin: 0 auto;
+
+  @include flex(column, none, center);
+
+  border-radius: 15px;
+
+  box-shadow: 10px 10px 15px 0 rgba(0, 0, 0, 0.3),
+    -10px 10px 15px 0 rgba(0, 0, 0, 0.3);
+}
+
+.app-filter-sort {
+  width: 100%;
+  gap: 10px;
+
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+
+  padding: 10px 20px 10px 20px;
+}

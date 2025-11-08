@@ -1,0 +1,77 @@
+@use "@/styles/variables" as *;
+@use "@/styles/mixins" as *;
+
+.header {
+  @include flex(column, flex-start, center);
+  padding: 20px;
+  width: 100%;
+
+  background-color: $primary;
+
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+
+  p {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: $surfaces;
+    align-self: flex-start;
+  }
+}
+
+.app-content {
+  @include flex(row, space-between, center);
+  width: 100%;
+  padding: 10px 20px 10px 20px;
+
+  h1 {
+    font-family: $heading-font;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: $accent;
+    color: $surfaces;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+
+    &:hover {
+      background-color: darken($accent, 10%);
+    }
+  }
+}
+
+.nav {
+  width: 100%;
+  gap: 10px;
+  @include flex(row, flex-start, center);
+}
+.nav__button {
+  @include flex(row, center, center);
+  gap: 8px;
+  padding: 13px 15px;
+  font-size: 0.95rem;
+  background: transparent;
+  color: $surfaces;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease,
+    box-shadow 120ms ease;
+  align-self: center;
+
+  background-color: rgba(0, 0, 0, 0.4);
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+  }
+}

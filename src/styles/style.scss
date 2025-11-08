@@ -1,0 +1,42 @@
+@use "./variables" as *;
+@use "./mixins" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: $body-font;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  background: $bg-color;
+  font-size: $base-font-size;
+
+  min-height: 100dvh;
+}
+
+// Remove styles
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input {
+  border: none;
+  outline: none;
+  font-family: inherit;
+}
