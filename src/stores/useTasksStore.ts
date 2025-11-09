@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import type { Task } from "@/types/task.type";
 import { ref, watch, computed } from "vue";
+import { useProjectStore } from "@/stores/useProjectStore";
 
 export const useTasksStore = defineStore("tasks", () => {
   const tasks = ref<Task[]>([]);
@@ -11,11 +12,32 @@ export const useTasksStore = defineStore("tasks", () => {
   const selectedDeadline = ref<string>("");
   const sortBy = ref<string>("All");
   const sortOrder = ref<"asc" | "desc">("asc");
+  const projectStore = useProjectStore();
 
   const storedTasks = localStorage.getItem("tasks");
   if (storedTasks) {
     tasks.value = JSON.parse(storedTasks);
   }
+
+  watch(
+    tasks,
+    (newTasks) => {
+      const counts: Record<number, number> = {};
+      newTasks.forEach((t) => {
+        counts[t.ProjectID] = (counts[t.ProjectID] || 0) + 1;
+      });
+
+      projectStore.projects.forEach((p: any) => {
+        const newCount = counts[p.ID] || 0;
+        if (p.TaskCounter !== newCount) {
+          p.TaskCounter = newCount;
+        }
+      });
+
+      localStorage.setItem("projects", JSON.stringify(projectStore.projects));
+    },
+    { deep: true, immediate: true }
+  );
 
   watch(
     tasks,

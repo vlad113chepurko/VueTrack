@@ -3,7 +3,6 @@ import "../add-project/_AddProjects.scss";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 import type { Task } from "@/types/task.type";
-import { useProjectStore } from "@/stores/useProjectStore";
 import { useTasksStore } from "@/stores/useTasksStore";
 import { TaskService } from "@/services/tasks.service";
 import { Field } from "vee-validate";
@@ -11,7 +10,6 @@ import { useFormStore } from "@/stores/useFormStore";
 
 const route = useRoute();
 const projectIdFromRoute = Number(route.params.id);
-const projects = useProjectStore().projects;
 const tasks = useTasksStore().tasks;
 const formStore = useFormStore();
 
@@ -26,10 +24,7 @@ const newTask = ref<Task>({
 </script>
 
 <template>
-  <form
-    class="form"
-    @submit.prevent="TaskService.addTaskToProject(newTask, projects)"
-  >
+  <form class="form" @submit.prevent="TaskService.addTaskToProject(newTask)">
     <h2>Add New Task</h2>
     <button @click="formStore.closeForm()" type="button" class="form__close">
       <span>X</span>
