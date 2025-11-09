@@ -13,7 +13,7 @@ watch(
     if (isOpen) {
       timer = window.setTimeout(() => {
         modalStore.closeModal();
-      }, 5000);
+      }, 10000);
     } else if (timer) {
       clearTimeout(timer);
       timer = null;

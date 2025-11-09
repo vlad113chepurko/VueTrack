@@ -27,7 +27,6 @@ export const useTasksStore = defineStore("tasks", () => {
   function addTask(task: Task) {
     tasks.value.push(task);
   }
-
   // Filters
   const filteredTasks = computed(() => {
     let filtered = tasks.value;

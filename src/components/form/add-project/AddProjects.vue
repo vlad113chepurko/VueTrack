@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import "./_AddProjects.scss";
 import { ref } from "vue";
-import type { Project } from "@/types/task.type";
+import type { Project } from "@/types/project.type";
 import { useProjectStore } from "@/stores/useProjectStore";
 import { ProjectsService } from "@/services/projects.service";
+import { useFormStore } from "@/stores/useFormStore";
 
 const projectStore = useProjectStore();
 const projects = projectStore.projects;
+const formStore = useFormStore();
 
 const newProject = ref<Project>({
   ID: projects.length > 0 ? Math.max(...projects.map((p) => p.ID)) + 1 : 1,
@@ -25,7 +27,7 @@ const newProject = ref<Project>({
     @submit.prevent="ProjectsService.addProject(newProject, projectStore)"
   >
     <h2>Add New Project</h2>
-    <button @click="$emit('close')" type="button" class="form__close">
+    <button @click="formStore.closeForm()" type="button" class="form__close">
       <span>X</span>
     </button>
     <input

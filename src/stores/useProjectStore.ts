@@ -88,6 +88,17 @@ export const useProjectStore = defineStore("project", () => {
     projects.value.push(newProject);
   }
 
+  function updateProject(updatedProject: Project) {
+    const index = projects.value.findIndex((p) => p.ID === updatedProject.ID);
+    if (index !== -1) {
+      projects.value[index] = updatedProject;
+    }
+  }
+
+  function deleteProject(projectId: number) {
+    projects.value = projects.value.filter((p) => p.ID !== projectId);
+  }
+
   function getProjectById(id: number) {
     return projects.value.find((p) => p.ID === id);
   }
@@ -116,5 +127,7 @@ export const useProjectStore = defineStore("project", () => {
     setNameFilter,
     setSort,
     updateFiltered,
+    updateProject,
+    deleteProject,
   };
 });

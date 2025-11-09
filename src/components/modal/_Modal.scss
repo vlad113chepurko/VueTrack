@@ -6,9 +6,10 @@
   bottom: 10px;
   right: 10px;
 
-  width: 300px;
+  width: auto;
+  max-width: 500px;
   height: 65px;
-  padding: 10px;
+  padding: 20px;
   background: $accent;
 
   display: flex;
@@ -18,7 +19,7 @@
 
   font-weight: bold;
 
-  border-radius: 5%;
+  border-radius: 5px;
 
   font-size: 1rem;
   color: white;
