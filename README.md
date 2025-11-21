@@ -47,8 +47,8 @@ VueTracker - це веб-додаток для управління проєкт
 1. Клонувати репозиторій:
 
 ```bash
-git clone https://github.com/vlad113chepurko/VueTrack
-cd VueTracker
+git clone https://github.com/vlad113chepurko/ProjecTracker  
+cd ProjecTracker  
 npm run dev
 ```
 
